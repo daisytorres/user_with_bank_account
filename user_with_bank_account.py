@@ -1,7 +1,7 @@
 class BankAccount:
-    # all_accounts = []
-
-    def __init__(self, int_rate = 0.01, balance = 0): 
+    #class attribute
+    all_accounts = []
+    def __init__(self, int_rate = 0.01, balance =0, acc_type="checking"): 
         self.int_rate = int_rate
         self.balance = balance
         self.acc_type = acc_type
@@ -35,18 +35,18 @@ class BankAccount:
         return self
 
 class User:
-    def __init__(self, name, email):
+    def __init__(self, name, email, account):
         self.name = name
         self.email = email
-        self.account = BankAccount(int_rate = 0.01, balance = 0)
+        self.account = account
 
     def make_deposit (self, amount):
         self.account.deposit(amount)
         print(f"You made a deposit of {amount}")
         return self
     
-    def withdrawal_amount (self, amount):
-        self.account.withdrawal (amount)
+    def withdraw_amount (self, amount):
+        self.account.withdraw (amount)
         print(f"You took out {amount}")
         return self
     
@@ -56,6 +56,8 @@ class User:
         print(self.email)
         print(f"Your account balance is {self.account.balance}")
         return self
-    
-account_holder = User("Daisy", "daisy@fake.com")
-print(account_holder.withdrawal_amount(500))
+
+daisy = BankAccount() #created instance of a bank account  
+account_holder = User("Daisy", "daisy@fake.com", daisy) # 
+print(account_holder.withdraw_amount(500))
+print(account_holder.display())
